@@ -6,7 +6,8 @@
   "scripts": {
     "start": "nodemon server.js",
     "start:prod": " NODE_ENV=production nodemon server.js",
-    "parcel:watch": "parcel watch ./public/js/index.js --dist-dir ./public/js/output"
+    "parcel:watch": "parcel watch ./public/js/index.js --dist-dir ./public/js/output",
+    "parcel:build": "parcel build ./public/js/index.js --dist-dir ./public/js/output"
   },
   "type": "module",
   "author": "bishal",

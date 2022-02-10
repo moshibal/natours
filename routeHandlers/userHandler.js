@@ -59,7 +59,7 @@ export const updataMe = async (req, res, next) => {
     }
 
     let filteredBody = filteredObj(req.body, 'name', 'email');
-    console.log(req.file.filename);
+
     if (req.file) {
       filteredBody.photo = req.file.filename;
     }

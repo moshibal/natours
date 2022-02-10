@@ -96,7 +96,6 @@ export const getAll = (Model) => async (req, res) => {
       },
     });
   } catch (error) {
-    console.log('error');
     res.status(404).json({
       status: 'fail',
       message: error.message,

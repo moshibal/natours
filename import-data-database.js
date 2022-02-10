@@ -33,14 +33,14 @@ const insertData = async () => {
   await tourModel.create(tourdata);
   await userModel.create(userdata, { validateBeforeSave: false });
   await reviewModel.create(reviewdata);
-  console.log('successfully added data..');
+  // console.log('successfully added data..');
   process.exit();
 };
 const deleteAllData = async () => {
   await tourModel.deleteMany();
   await userModel.deleteMany();
   await reviewModel.deleteMany();
-  console.log('successfully deleted data..');
+  // console.log('successfully deleted data..');
   process.exit();
 };
 try {

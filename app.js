@@ -36,6 +36,7 @@ const scriptSrcUrls = [
   'https://api.mapbox.com/',
   'https://*.cloudflare.com',
   'https://js.stripe.com/v3/',
+  'ws://localhost:1234/',
 ];
 const styleSrcUrls = [
   'https://api.mapbox.com/',

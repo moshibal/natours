@@ -1,7 +1,6 @@
 import tourModel from '../models/tourModel.js';
 import userModel from '../models/userModel.js';
 export const overviewHandler = async (req, res) => {
-  console.log('im still running overview');
   const tours = await tourModel.find();
   res.render('_overview', { title: 'overview', tours });
 };

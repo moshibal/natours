@@ -59,7 +59,6 @@ reviewSchema.post('save', function () {
 });
 //this pre and post hook are used while updating and deleting the existing review.
 reviewSchema.pre(/^findOneAnd/, async function (next) {
-  console.log('pre');
   //this is query
   //this took me 2 days to debug.
   //the problem here is very simple that you cant do same query twice, you use of clone method on query to re execute again.
@@ -70,7 +69,6 @@ reviewSchema.pre(/^findOneAnd/, async function (next) {
   next();
 });
 reviewSchema.post(/^findOneAnd/, async function () {
-  console.log('post');
   await this.review.constructor.calcAverageRatings(this.review.tour);
 });
 const reviewModel = mongoose.model('Review', reviewSchema);

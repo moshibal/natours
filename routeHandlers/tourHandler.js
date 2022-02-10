@@ -134,7 +134,7 @@ export const getAggregateTour = async (req, res, next) => {
     const { distance, unit } = req.params;
 
     const [latitude, longitude] = distance.split(',');
-    console.log(latitude, longitude);
+
     const distances = await tourModel.aggregate([
       {
         $geoNear: {

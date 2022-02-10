@@ -234,7 +234,6 @@ export const resetpassword = async (req, res, next) => {
 //handler for updating the password
 export const updatePassword = async (req, res, next) => {
   try {
-    console.log(req.body.passwordCurrent);
     //get the user id
     const currentPassword = req.body.passwordCurrent;
 

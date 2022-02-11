@@ -7,6 +7,7 @@ export const __dirname = path.resolve();
 import express from 'express';
 
 import morgan from 'morgan';
+import cors from 'cors';
 import rateLimit from 'express-rate-limit';
 import helmet from 'helmet';
 import mongoSanitize from 'express-mongo-sanitize';
@@ -23,6 +24,8 @@ import bookingRouter from './routes/bookingRoutes.js';
 
 //creating the app using express,
 const app = express();
+app.use(cors());
+app.options('*', cors());
 app.enable('trust proxy');
 app.set('view engine', 'pug');
 app.set('views', `${__dirname}/views`);

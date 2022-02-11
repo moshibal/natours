@@ -23,7 +23,7 @@ import bookingRouter from './routes/bookingRoutes.js';
 
 //creating the app using express,
 const app = express();
-
+app.enable('trust proxy');
 app.set('view engine', 'pug');
 app.set('views', `${__dirname}/views`);
 //for serving static files

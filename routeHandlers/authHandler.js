@@ -13,12 +13,11 @@ const createToken = (id) => {
 let cookieOption = {
   expires: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000),
   httpOnly: true,
+  secure: req.secure || req.headers['x-forwarded-proto' === 'https'],
 };
-if (process.env.NODE_ENV === 'production') {
-  cookieOption.secure = true;
-}
+
 //for creating token and sending response with cookie
-const createTokenAndSend = (id, user, res) => {
+const createTokenAndSend = (id, user, res, req) => {
   const token = createToken(id);
   res.cookie('jwt', token, cookieOption);
   user.password = undefined;
@@ -256,7 +255,7 @@ export const updatePassword = async (req, res, next) => {
     user.password = req.body.password;
     user.passwordConfirm = req.body.passwordConfirm;
     await user.save();
-    createTokenAndSend(user._id, user, res);
+    createTokenAndSend(user._id, user, res, req);
   } catch (error) {
     res.status(404).json({ message: error.message });
   }

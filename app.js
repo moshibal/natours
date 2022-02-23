@@ -25,7 +25,7 @@ import bookingRouter from './routes/bookingRoutes.js';
 //creating the app using express,
 const app = express();
 app.use(cors());
-app.options('*', cors());
+
 app.enable('trust proxy');
 app.set('view engine', 'pug');
 app.set('views', `${__dirname}/views`);
@@ -120,9 +120,11 @@ app.use((req, res, next) => {
 
   next();
 });
-
+import { getcart, postcart } from './routeHandlers/carthandler.js';
 //Routes
-
+app.get('/getcart', getcart);
+app.post('/postcart', postcart);
+//main
 app.use('/', viewRouter);
 app.use('/api/v1/tours', tourRouter);
 app.use('/api/v1/users', userRouter);

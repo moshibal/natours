@@ -10,16 +10,14 @@ const createToken = (id) => {
   });
 };
 
-let cookieOption = {
-  expires: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000),
-  httpOnly: true,
-  secure: req.secure || req.headers['x-forwarded-proto' === 'https'],
-};
-
 //for creating token and sending response with cookie
 const createTokenAndSend = (id, user, res, req) => {
   const token = createToken(id);
-  res.cookie('jwt', token, cookieOption);
+  res.cookie('jwt', token, {
+    expires: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000),
+    httpOnly: true,
+    secure: req.secure || req.headers['x-forwarded-proto' === 'https'],
+  });
   user.password = undefined;
 
   res.status(201).json({

@@ -1,2 +1,750 @@
-(()=>{function e(e){return e&&e.__esModule?e.default:e}var t="undefined"!=typeof globalThis?globalThis:"undefined"!=typeof self?self:"undefined"!=typeof window?window:"undefined"!=typeof global?global:{},n={},r={},o=t.parcelRequire11c7;null==o&&((o=function(e){if(e in n)return n[e].exports;if(e in r){var t=r[e];delete r[e];var o={id:e,exports:{}};return n[e]=o,t.call(o.exports,o,o.exports),o.exports}var s=new Error("Cannot find module '"+e+"'");throw s.code="MODULE_NOT_FOUND",s}).register=function(e,t){r[e]=t},t.parcelRequire11c7=o),o.register("81tj9",(function(e,t){"use strict";var n=o("eFc3n"),r=o("cG9HX"),s=o("hBrVA"),i=o("2PhsF");var a=function e(t){var o=new s(t),a=r(s.prototype.request,o);return n.extend(a,s.prototype,o),n.extend(a,o),a.create=function(n){return e(i(t,n))},a}(o("1nuTH"));a.Axios=s,a.Cancel=o("anxHC"),a.CancelToken=o("4iFhx"),a.isCancel=o("lCgfr"),a.VERSION=o("6yYtd").version,a.all=function(e){return Promise.all(e)},a.spread=o("albzn"),a.isAxiosError=o("1YbHN"),e.exports=a,e.exports.default=a})),o.register("eFc3n",(function(e,t){"use strict";var n=o("cG9HX"),r=Object.prototype.toString;function s(e){return Array.isArray(e)}function i(e){return void 0===e}function a(e){return"[object ArrayBuffer]"===r.call(e)}function u(e){return null!==e&&"object"==typeof e}function c(e){if("[object Object]"!==r.call(e))return!1;var t=Object.getPrototypeOf(e);return null===t||t===Object.prototype}function f(e){return"[object Function]"===r.call(e)}function l(e,t){if(null!=e)if("object"!=typeof e&&(e=[e]),s(e))for(var n=0,r=e.length;n<r;n++)t.call(null,e[n],n,e);else for(var o in e)Object.prototype.hasOwnProperty.call(e,o)&&t.call(null,e[o],o,e)}e.exports={isArray:s,isArrayBuffer:a,isBuffer:function(e){return null!==e&&!i(e)&&null!==e.constructor&&!i(e.constructor)&&"function"==typeof e.constructor.isBuffer&&e.constructor.isBuffer(e)},isFormData:function(e){return"[object FormData]"===r.call(e)},isArrayBufferView:function(e){return"undefined"!=typeof ArrayBuffer&&ArrayBuffer.isView?ArrayBuffer.isView(e):e&&e.buffer&&a(e.buffer)},isString:function(e){return"string"==typeof e},isNumber:function(e){return"number"==typeof e},isObject:u,isPlainObject:c,isUndefined:i,isDate:function(e){return"[object Date]"===r.call(e)},isFile:function(e){return"[object File]"===r.call(e)},isBlob:function(e){return"[object Blob]"===r.call(e)},isFunction:f,isStream:function(e){return u(e)&&f(e.pipe)},isURLSearchParams:function(e){return"[object URLSearchParams]"===r.call(e)},isStandardBrowserEnv:function(){return("undefined"==typeof navigator||"ReactNative"!==navigator.product&&"NativeScript"!==navigator.product&&"NS"!==navigator.product)&&("undefined"!=typeof window&&"undefined"!=typeof document)},forEach:l,merge:function e(){var t={};function n(n,r){c(t[r])&&c(n)?t[r]=e(t[r],n):c(n)?t[r]=e({},n):s(n)?t[r]=n.slice():t[r]=n}for(var r=0,o=arguments.length;r<o;r++)l(arguments[r],n);return t},extend:function(e,t,r){return l(t,(function(t,o){e[o]=r&&"function"==typeof t?n(t,r):t})),e},trim:function(e){return e.trim?e.trim():e.replace(/^\s+|\s+$/g,"")},stripBOM:function(e){return 65279===e.charCodeAt(0)&&(e=e.slice(1)),e}}})),o.register("cG9HX",(function(e,t){"use strict";e.exports=function(e,t){return function(){for(var n=new Array(arguments.length),r=0;r<n.length;r++)n[r]=arguments[r];return e.apply(t,n)}}})),o.register("hBrVA",(function(e,t){"use strict";var n=o("eFc3n"),r=o("iOHZJ"),s=o("9ltoJ"),i=o("cUzFg"),a=o("2PhsF"),u=o("8zXsW"),c=u.validators;function f(e){this.defaults=e,this.interceptors={request:new s,response:new s}}f.prototype.request=function(e,t){if("string"==typeof e?(t=t||{}).url=e:t=e||{},!t.url)throw new Error("Provided config url is not valid");(t=a(this.defaults,t)).method?t.method=t.method.toLowerCase():this.defaults.method?t.method=this.defaults.method.toLowerCase():t.method="get";var n=t.transitional;void 0!==n&&u.assertOptions(n,{silentJSONParsing:c.transitional(c.boolean),forcedJSONParsing:c.transitional(c.boolean),clarifyTimeoutError:c.transitional(c.boolean)},!1);var r=[],o=!0;this.interceptors.request.forEach((function(e){"function"==typeof e.runWhen&&!1===e.runWhen(t)||(o=o&&e.synchronous,r.unshift(e.fulfilled,e.rejected))}));var s,f=[];if(this.interceptors.response.forEach((function(e){f.push(e.fulfilled,e.rejected)})),!o){var l=[i,void 0];for(Array.prototype.unshift.apply(l,r),l=l.concat(f),s=Promise.resolve(t);l.length;)s=s.then(l.shift(),l.shift());return s}for(var d=t;r.length;){var p=r.shift(),h=r.shift();try{d=p(d)}catch(e){h(e);break}}try{s=i(d)}catch(e){return Promise.reject(e)}for(;f.length;)s=s.then(f.shift(),f.shift());return s},f.prototype.getUri=function(e){if(!e.url)throw new Error("Provided config url is not valid");return e=a(this.defaults,e),r(e.url,e.params,e.paramsSerializer).replace(/^\?/,"")},n.forEach(["delete","get","head","options"],(function(e){f.prototype[e]=function(t,n){return this.request(a(n||{},{method:e,url:t,data:(n||{}).data}))}})),n.forEach(["post","put","patch"],(function(e){f.prototype[e]=function(t,n,r){return this.request(a(r||{},{method:e,url:t,data:n}))}})),e.exports=f})),o.register("iOHZJ",(function(e,t){"use strict";var n=o("eFc3n");function r(e){return encodeURIComponent(e).replace(/%3A/gi,":").replace(/%24/g,"$").replace(/%2C/gi,",").replace(/%20/g,"+").replace(/%5B/gi,"[").replace(/%5D/gi,"]")}e.exports=function(e,t,o){if(!t)return e;var s;if(o)s=o(t);else if(n.isURLSearchParams(t))s=t.toString();else{var i=[];n.forEach(t,(function(e,t){null!=e&&(n.isArray(e)?t+="[]":e=[e],n.forEach(e,(function(e){n.isDate(e)?e=e.toISOString():n.isObject(e)&&(e=JSON.stringify(e)),i.push(r(t)+"="+r(e))})))})),s=i.join("&")}if(s){var a=e.indexOf("#");-1!==a&&(e=e.slice(0,a)),e+=(-1===e.indexOf("?")?"?":"&")+s}return e}})),o.register("9ltoJ",(function(e,t){"use strict";var n=o("eFc3n");function r(){this.handlers=[]}r.prototype.use=function(e,t,n){return this.handlers.push({fulfilled:e,rejected:t,synchronous:!!n&&n.synchronous,runWhen:n?n.runWhen:null}),this.handlers.length-1},r.prototype.eject=function(e){this.handlers[e]&&(this.handlers[e]=null)},r.prototype.forEach=function(e){n.forEach(this.handlers,(function(t){null!==t&&e(t)}))},e.exports=r})),o.register("cUzFg",(function(e,t){"use strict";var n=o("eFc3n"),r=o("kgh03"),s=o("lCgfr"),i=o("1nuTH"),a=o("anxHC");function u(e){if(e.cancelToken&&e.cancelToken.throwIfRequested(),e.signal&&e.signal.aborted)throw new a("canceled")}e.exports=function(e){return u(e),e.headers=e.headers||{},e.data=r.call(e,e.data,e.headers,e.transformRequest),e.headers=n.merge(e.headers.common||{},e.headers[e.method]||{},e.headers),n.forEach(["delete","get","head","post","put","patch","common"],(function(t){delete e.headers[t]})),(e.adapter||i.adapter)(e).then((function(t){return u(e),t.data=r.call(e,t.data,t.headers,e.transformResponse),t}),(function(t){return s(t)||(u(e),t&&t.response&&(t.response.data=r.call(e,t.response.data,t.response.headers,e.transformResponse))),Promise.reject(t)}))}})),o.register("kgh03",(function(e,t){"use strict";var n=o("eFc3n"),r=o("1nuTH");e.exports=function(e,t,o){var s=this||r;return n.forEach(o,(function(n){e=n.call(s,e,t)})),e}})),o.register("1nuTH",(function(e,t){"use strict";var n=o("ibaza"),r=o("eFc3n"),s=o("elOvr"),i=o("fEfFg"),a={"Content-Type":"application/x-www-form-urlencoded"};function u(e,t){!r.isUndefined(e)&&r.isUndefined(e["Content-Type"])&&(e["Content-Type"]=t)}var c,f={transitional:{silentJSONParsing:!0,forcedJSONParsing:!0,clarifyTimeoutError:!1},adapter:(("undefined"!=typeof XMLHttpRequest||void 0!==n&&"[object process]"===Object.prototype.toString.call(n))&&(c=o("8nTSD")),c),transformRequest:[function(e,t){return s(t,"Accept"),s(t,"Content-Type"),r.isFormData(e)||r.isArrayBuffer(e)||r.isBuffer(e)||r.isStream(e)||r.isFile(e)||r.isBlob(e)?e:r.isArrayBufferView(e)?e.buffer:r.isURLSearchParams(e)?(u(t,"application/x-www-form-urlencoded;charset=utf-8"),e.toString()):r.isObject(e)||t&&"application/json"===t["Content-Type"]?(u(t,"application/json"),function(e,t,n){if(r.isString(e))try{return(t||JSON.parse)(e),r.trim(e)}catch(e){if("SyntaxError"!==e.name)throw e}return(n||JSON.stringify)(e)}(e)):e}],transformResponse:[function(e){var t=this.transitional||f.transitional,n=t&&t.silentJSONParsing,o=t&&t.forcedJSONParsing,s=!n&&"json"===this.responseType;if(s||o&&r.isString(e)&&e.length)try{return JSON.parse(e)}catch(e){if(s){if("SyntaxError"===e.name)throw i(e,this,"E_JSON_PARSE");throw e}}return e}],timeout:0,xsrfCookieName:"XSRF-TOKEN",xsrfHeaderName:"X-XSRF-TOKEN",maxContentLength:-1,maxBodyLength:-1,validateStatus:function(e){return e>=200&&e<300},headers:{common:{Accept:"application/json, text/plain, */*"}}};r.forEach(["delete","get","head"],(function(e){f.headers[e]={}})),r.forEach(["post","put","patch"],(function(e){f.headers[e]=r.merge(a)})),e.exports=f})),o.register("ibaza",(function(e,t){var n,r,o=e.exports={};function s(){throw new Error("setTimeout has not been defined")}function i(){throw new Error("clearTimeout has not been defined")}function a(e){if(n===setTimeout)return setTimeout(e,0);if((n===s||!n)&&setTimeout)return n=setTimeout,setTimeout(e,0);try{return n(e,0)}catch(t){try{return n.call(null,e,0)}catch(t){return n.call(this,e,0)}}}!function(){try{n="function"==typeof setTimeout?setTimeout:s}catch(e){n=s}try{r="function"==typeof clearTimeout?clearTimeout:i}catch(e){r=i}}();var u,c=[],f=!1,l=-1;function d(){f&&u&&(f=!1,u.length?c=u.concat(c):l=-1,c.length&&p())}function p(){if(!f){var e=a(d);f=!0;for(var t=c.length;t;){for(u=c,c=[];++l<t;)u&&u[l].run();l=-1,t=c.length}u=null,f=!1,function(e){if(r===clearTimeout)return clearTimeout(e);if((r===i||!r)&&clearTimeout)return r=clearTimeout,clearTimeout(e);try{r(e)}catch(t){try{return r.call(null,e)}catch(t){return r.call(this,e)}}}(e)}}function h(e,t){this.fun=e,this.array=t}function m(){}o.nextTick=function(e){var t=new Array(arguments.length-1);if(arguments.length>1)for(var n=1;n<arguments.length;n++)t[n-1]=arguments[n];c.push(new h(e,t)),1!==c.length||f||a(p)},h.prototype.run=function(){this.fun.apply(null,this.array)},o.title="browser",o.browser=!0,o.env={},o.argv=[],o.version="",o.versions={},o.on=m,o.addListener=m,o.once=m,o.off=m,o.removeListener=m,o.removeAllListeners=m,o.emit=m,o.prependListener=m,o.prependOnceListener=m,o.listeners=function(e){return[]},o.binding=function(e){throw new Error("process.binding is not supported")},o.cwd=function(){return"/"},o.chdir=function(e){throw new Error("process.chdir is not supported")},o.umask=function(){return 0}})),o.register("elOvr",(function(e,t){"use strict";var n=o("eFc3n");e.exports=function(e,t){n.forEach(e,(function(n,r){r!==t&&r.toUpperCase()===t.toUpperCase()&&(e[t]=n,delete e[r])}))}})),o.register("fEfFg",(function(e,t){"use strict";e.exports=function(e,t,n,r,o){return e.config=t,n&&(e.code=n),e.request=r,e.response=o,e.isAxiosError=!0,e.toJSON=function(){return{message:this.message,name:this.name,description:this.description,number:this.number,fileName:this.fileName,lineNumber:this.lineNumber,columnNumber:this.columnNumber,stack:this.stack,config:this.config,code:this.code,status:this.response&&this.response.status?this.response.status:null}},e}})),o.register("8nTSD",(function(e,t){"use strict";var n=o("eFc3n"),r=o("gyIfz"),s=o("6D8uh"),i=o("iOHZJ"),a=o("cgfHI"),u=o("4Ik1V"),c=o("4YUSN"),f=o("hYe4p"),l=o("1nuTH"),d=o("anxHC");e.exports=function(e){return new Promise((function(t,o){var p,h=e.data,m=e.headers,g=e.responseType;function v(){e.cancelToken&&e.cancelToken.unsubscribe(p),e.signal&&e.signal.removeEventListener("abort",p)}n.isFormData(h)&&delete m["Content-Type"];var y=new XMLHttpRequest;if(e.auth){var w=e.auth.username||"",b=e.auth.password?unescape(encodeURIComponent(e.auth.password)):"";m.Authorization="Basic "+btoa(w+":"+b)}var x=a(e.baseURL,e.url);function E(){if(y){var n="getAllResponseHeaders"in y?u(y.getAllResponseHeaders()):null,s={data:g&&"text"!==g&&"json"!==g?y.response:y.responseText,status:y.status,statusText:y.statusText,headers:n,config:e,request:y};r((function(e){t(e),v()}),(function(e){o(e),v()}),s),y=null}}if(y.open(e.method.toUpperCase(),i(x,e.params,e.paramsSerializer),!0),y.timeout=e.timeout,"onloadend"in y?y.onloadend=E:y.onreadystatechange=function(){y&&4===y.readyState&&(0!==y.status||y.responseURL&&0===y.responseURL.indexOf("file:"))&&setTimeout(E)},y.onabort=function(){y&&(o(f("Request aborted",e,"ECONNABORTED",y)),y=null)},y.onerror=function(){o(f("Network Error",e,null,y)),y=null},y.ontimeout=function(){var t=e.timeout?"timeout of "+e.timeout+"ms exceeded":"timeout exceeded",n=e.transitional||l.transitional;e.timeoutErrorMessage&&(t=e.timeoutErrorMessage),o(f(t,e,n.clarifyTimeoutError?"ETIMEDOUT":"ECONNABORTED",y)),y=null},n.isStandardBrowserEnv()){var T=(e.withCredentials||c(x))&&e.xsrfCookieName?s.read(e.xsrfCookieName):void 0;T&&(m[e.xsrfHeaderName]=T)}"setRequestHeader"in y&&n.forEach(m,(function(e,t){void 0===h&&"content-type"===t.toLowerCase()?delete m[t]:y.setRequestHeader(t,e)})),n.isUndefined(e.withCredentials)||(y.withCredentials=!!e.withCredentials),g&&"json"!==g&&(y.responseType=e.responseType),"function"==typeof e.onDownloadProgress&&y.addEventListener("progress",e.onDownloadProgress),"function"==typeof e.onUploadProgress&&y.upload&&y.upload.addEventListener("progress",e.onUploadProgress),(e.cancelToken||e.signal)&&(p=function(e){y&&(o(!e||e&&e.type?new d("canceled"):e),y.abort(),y=null)},e.cancelToken&&e.cancelToken.subscribe(p),e.signal&&(e.signal.aborted?p():e.signal.addEventListener("abort",p))),h||(h=null),y.send(h)}))}})),o.register("gyIfz",(function(e,t){"use strict";var n=o("hYe4p");e.exports=function(e,t,r){var o=r.config.validateStatus;r.status&&o&&!o(r.status)?t(n("Request failed with status code "+r.status,r.config,null,r.request,r)):e(r)}})),o.register("hYe4p",(function(e,t){"use strict";var n=o("fEfFg");e.exports=function(e,t,r,o,s){var i=new Error(e);return n(i,t,r,o,s)}})),o.register("6D8uh",(function(e,t){"use strict";var n=o("eFc3n");e.exports=n.isStandardBrowserEnv()?{write:function(e,t,r,o,s,i){var a=[];a.push(e+"="+encodeURIComponent(t)),n.isNumber(r)&&a.push("expires="+new Date(r).toGMTString()),n.isString(o)&&a.push("path="+o),n.isString(s)&&a.push("domain="+s),!0===i&&a.push("secure"),document.cookie=a.join("; ")},read:function(e){var t=document.cookie.match(new RegExp("(^|;\\s*)("+e+")=([^;]*)"));return t?decodeURIComponent(t[3]):null},remove:function(e){this.write(e,"",Date.now()-864e5)}}:{write:function(){},read:function(){return null},remove:function(){}}})),o.register("cgfHI",(function(e,t){"use strict";var n=o("uAxSn"),r=o("aFAjA");e.exports=function(e,t){return e&&!n(t)?r(e,t):t}})),o.register("uAxSn",(function(e,t){"use strict";e.exports=function(e){return/^([a-z][a-z\d+\-.]*:)?\/\//i.test(e)}})),o.register("aFAjA",(function(e,t){"use strict";e.exports=function(e,t){return t?e.replace(/\/+$/,"")+"/"+t.replace(/^\/+/,""):e}})),o.register("4Ik1V",(function(e,t){"use strict";var n=o("eFc3n"),r=["age","authorization","content-length","content-type","etag","expires","from","host","if-modified-since","if-unmodified-since","last-modified","location","max-forwards","proxy-authorization","referer","retry-after","user-agent"];e.exports=function(e){var t,o,s,i={};return e?(n.forEach(e.split("\n"),(function(e){if(s=e.indexOf(":"),t=n.trim(e.substr(0,s)).toLowerCase(),o=n.trim(e.substr(s+1)),t){if(i[t]&&r.indexOf(t)>=0)return;i[t]="set-cookie"===t?(i[t]?i[t]:[]).concat([o]):i[t]?i[t]+", "+o:o}})),i):i}})),o.register("4YUSN",(function(e,t){"use strict";var n=o("eFc3n");e.exports=n.isStandardBrowserEnv()?function(){var e,t=/(msie|trident)/i.test(navigator.userAgent),r=document.createElement("a");function o(e){var n=e;return t&&(r.setAttribute("href",n),n=r.href),r.setAttribute("href",n),{href:r.href,protocol:r.protocol?r.protocol.replace(/:$/,""):"",host:r.host,search:r.search?r.search.replace(/^\?/,""):"",hash:r.hash?r.hash.replace(/^#/,""):"",hostname:r.hostname,port:r.port,pathname:"/"===r.pathname.charAt(0)?r.pathname:"/"+r.pathname}}return e=o(window.location.href),function(t){var r=n.isString(t)?o(t):t;return r.protocol===e.protocol&&r.host===e.host}}():function(){return!0}})),o.register("anxHC",(function(e,t){"use strict";function n(e){this.message=e}n.prototype.toString=function(){return"Cancel"+(this.message?": "+this.message:"")},n.prototype.__CANCEL__=!0,e.exports=n})),o.register("lCgfr",(function(e,t){"use strict";e.exports=function(e){return!(!e||!e.__CANCEL__)}})),o.register("2PhsF",(function(e,t){"use strict";var n=o("eFc3n");e.exports=function(e,t){t=t||{};var r={};function o(e,t){return n.isPlainObject(e)&&n.isPlainObject(t)?n.merge(e,t):n.isPlainObject(t)?n.merge({},t):n.isArray(t)?t.slice():t}function s(r){return n.isUndefined(t[r])?n.isUndefined(e[r])?void 0:o(void 0,e[r]):o(e[r],t[r])}function i(e){if(!n.isUndefined(t[e]))return o(void 0,t[e])}function a(r){return n.isUndefined(t[r])?n.isUndefined(e[r])?void 0:o(void 0,e[r]):o(void 0,t[r])}function u(n){return n in t?o(e[n],t[n]):n in e?o(void 0,e[n]):void 0}var c={url:i,method:i,data:i,baseURL:a,transformRequest:a,transformResponse:a,paramsSerializer:a,timeout:a,timeoutMessage:a,withCredentials:a,adapter:a,responseType:a,xsrfCookieName:a,xsrfHeaderName:a,onUploadProgress:a,onDownloadProgress:a,decompress:a,maxContentLength:a,maxBodyLength:a,transport:a,httpAgent:a,httpsAgent:a,cancelToken:a,socketPath:a,responseEncoding:a,validateStatus:u};return n.forEach(Object.keys(e).concat(Object.keys(t)),(function(e){var t=c[e]||s,o=t(e);n.isUndefined(o)&&t!==u||(r[e]=o)})),r}})),o.register("8zXsW",(function(e,t){"use strict";var n=o("6yYtd").version,r={};["object","boolean","number","function","string","symbol"].forEach((function(e,t){r[e]=function(n){return typeof n===e||"a"+(t<1?"n ":" ")+e}}));var s={};r.transitional=function(e,t,r){function o(e,t){return"[Axios v"+n+"] Transitional option '"+e+"'"+t+(r?". "+r:"")}return function(n,r,i){if(!1===e)throw new Error(o(r," has been removed"+(t?" in "+t:"")));return t&&!s[r]&&(s[r]=!0,console.warn(o(r," has been deprecated since v"+t+" and will be removed in the near future"))),!e||e(n,r,i)}},e.exports={assertOptions:function(e,t,n){if("object"!=typeof e)throw new TypeError("options must be an object");for(var r=Object.keys(e),o=r.length;o-- >0;){var s=r[o],i=t[s];if(i){var a=e[s],u=void 0===a||i(a,s,e);if(!0!==u)throw new TypeError("option "+s+" must be "+u)}else if(!0!==n)throw Error("Unknown option "+s)}},validators:r}})),o.register("6yYtd",(function(e,t){e.exports={version:"0.25.0"}})),o.register("4iFhx",(function(e,t){"use strict";var n=o("anxHC");function r(e){if("function"!=typeof e)throw new TypeError("executor must be a function.");var t;this.promise=new Promise((function(e){t=e}));var r=this;this.promise.then((function(e){if(r._listeners){var t,n=r._listeners.length;for(t=0;t<n;t++)r._listeners[t](e);r._listeners=null}})),this.promise.then=function(e){var t,n=new Promise((function(e){r.subscribe(e),t=e})).then(e);return n.cancel=function(){r.unsubscribe(t)},n},e((function(e){r.reason||(r.reason=new n(e),t(r.reason))}))}r.prototype.throwIfRequested=function(){if(this.reason)throw this.reason},r.prototype.subscribe=function(e){this.reason?e(this.reason):this._listeners?this._listeners.push(e):this._listeners=[e]},r.prototype.unsubscribe=function(e){if(this._listeners){var t=this._listeners.indexOf(e);-1!==t&&this._listeners.splice(t,1)}},r.source=function(){var e;return{token:new r((function(t){e=t})),cancel:e}},e.exports=r})),o.register("albzn",(function(e,t){"use strict";e.exports=function(e){return function(t){return e.apply(null,t)}}})),o.register("1YbHN",(function(e,t){"use strict";var n=o("eFc3n");e.exports=function(e){return n.isObject(e)&&!0===e.isAxiosError}}));var s;s=o("81tj9");const i=()=>{const e=document.querySelector(".alert");e&&e.parentElement.removeChild(e)},a=(e,t)=>{i();const n=`<div class="alert alert--${e}">${t}</div>`;document.querySelector("body").insertAdjacentHTML("afterbegin",n),window.setTimeout(i,5e3)},u=async(t,n)=>{try{const r="password"===n?"/api/v1/users/updatepassword":"/api/v1/users/updateme";(await e(s)({method:"patch",url:r,data:t})).data.status="success",a("success",`user ${n} updated successfully`)}catch(e){a("error",e.response.data.message)}},c=Stripe("pk_test_51KQpuTKrlXNuJzMcYQn015K2UlTnesCu0KnHXGEwbG52vHrjHOgKV5HlKzukUhRwPbaK846qTRlnkj5igvxt84Kd00RMfao0h2"),f=document.getElementById("map"),l=document.querySelector(".form--login"),d=document.querySelector(".nav__el--logout"),p=document.querySelector(".form-user-data"),h=document.querySelector(".form-user-password"),m=document.getElementById("book-tour");if(f){(e=>{mapboxgl.accessToken="pk.eyJ1IjoiYmlzaGFsa2Fya2kiLCJhIjoiY2t6NG4wbHlmMGk5bDJ2bnltYzR1ZW54NCJ9.3hBPs8q_dHXFJ0lK6ln7SA";const t=new mapboxgl.Map({container:"map",style:"mapbox://styles/mapbox/streets-v11",scrollZoom:!1}),n=new mapboxgl.LngLatBounds;e.forEach((e=>{const r=document.createElement("div");r.className="marker",new mapboxgl.Marker({element:r,anchor:"bottom"}).setLngLat(e.coordinates).addTo(t),new mapboxgl.Popup({offset:30}).setLngLat(e.coordinates).setHTML(`<p>Day ${e.day}: ${e.description}</p>`).addTo(t),n.extend(e.coordinates)})),t.fitBounds(n)})(JSON.parse(f.dataset.locations))}l&&l.addEventListener("submit",(t=>{t.preventDefault();(async(t,n)=>{try{(await e(s)({method:"post",url:"/api/v1/users/signin",data:{email:t,password:n}})).data.status="success",a("success","logged in successfully!"),window.setTimeout((()=>{location.assign("/")}),1500)}catch(e){a("error",e.response.data.message)}})(document.getElementById("email").value,document.getElementById("password").value)})),d&&d.addEventListener("click",(t=>{t.preventDefault(),(async()=>{try{"success"===(await e(s)({method:"GET",url:"/api/v1/users/logout"})).data.status&&window.setTimeout((()=>{location.assign("/")}),1e3)}catch(e){a("error",e.response.data.message)}})()})),p&&p.addEventListener("submit",(e=>{e.preventDefault();const t=new FormData;t.append("email",document.getElementById("email").value),t.append("name",document.getElementById("name").value),t.append("photo",document.getElementById("photo").files[0]),u(t,"data")})),h&&h.addEventListener("submit",(e=>{e.preventDefault();const t=document.getElementById("password-current").value,n=document.getElementById("password").value,r=document.getElementById("password-confirm").value;u({passwordCurrent:t,password:n,passwordConfirm:r},"password")})),m&&m.addEventListener("click",(t=>{t.preventDefault(),m.innerHTML="Processing...";const{tourId:n}=t.target.dataset;console.log(n),(async t=>{try{const n=await e(s)(`/api/v1/bookings/checkout-session/${t}`);n&&await c.redirectToCheckout({sessionId:n.data.session.id})}catch(e){a("error",e)}})(n)}))})();
+// modules are defined as an array
+// [ module function, map of requires ]
+//
+// map of requires is short require name -> numeric require
+//
+// anything defined in a previous bundle is accessed via the
+// orig method which is the require for previous bundles
+
+(function (modules, entry, mainEntry, parcelRequireName, globalName) {
+  /* eslint-disable no-undef */
+  var globalObject =
+    typeof globalThis !== 'undefined'
+      ? globalThis
+      : typeof self !== 'undefined'
+      ? self
+      : typeof window !== 'undefined'
+      ? window
+      : typeof global !== 'undefined'
+      ? global
+      : {};
+  /* eslint-enable no-undef */
+
+  // Save the require from previous bundle to this closure if any
+  var previousRequire =
+    typeof globalObject[parcelRequireName] === 'function' &&
+    globalObject[parcelRequireName];
+
+  var cache = previousRequire.cache || {};
+  // Do not use `require` to prevent Webpack from trying to bundle this call
+  var nodeRequire =
+    typeof module !== 'undefined' &&
+    typeof module.require === 'function' &&
+    module.require.bind(module);
+
+  function newRequire(name, jumped) {
+    if (!cache[name]) {
+      if (!modules[name]) {
+        // if we cannot find the module within our internal map or
+        // cache jump to the current global require ie. the last bundle
+        // that was added to the page.
+        var currentRequire =
+          typeof globalObject[parcelRequireName] === 'function' &&
+          globalObject[parcelRequireName];
+        if (!jumped && currentRequire) {
+          return currentRequire(name, true);
+        }
+
+        // If there are other bundles on this page the require from the
+        // previous one is saved to 'previousRequire'. Repeat this as
+        // many times as there are bundles until the module is found or
+        // we exhaust the require chain.
+        if (previousRequire) {
+          return previousRequire(name, true);
+        }
+
+        // Try the node require function if it exists.
+        if (nodeRequire && typeof name === 'string') {
+          return nodeRequire(name);
+        }
+
+        var err = new Error("Cannot find module '" + name + "'");
+        err.code = 'MODULE_NOT_FOUND';
+        throw err;
+      }
+
+      localRequire.resolve = resolve;
+      localRequire.cache = {};
+
+      var module = (cache[name] = new newRequire.Module(name));
+
+      modules[name][0].call(
+        module.exports,
+        localRequire,
+        module,
+        module.exports,
+        this
+      );
+    }
+
+    return cache[name].exports;
+
+    function localRequire(x) {
+      var res = localRequire.resolve(x);
+      return res === false ? {} : newRequire(res);
+    }
+
+    function resolve(x) {
+      var id = modules[name][1][x];
+      return id != null ? id : x;
+    }
+  }
+
+  function Module(moduleName) {
+    this.id = moduleName;
+    this.bundle = newRequire;
+    this.exports = {};
+  }
+
+  newRequire.isParcelRequire = true;
+  newRequire.Module = Module;
+  newRequire.modules = modules;
+  newRequire.cache = cache;
+  newRequire.parent = previousRequire;
+  newRequire.register = function (id, exports) {
+    modules[id] = [
+      function (require, module) {
+        module.exports = exports;
+      },
+      {},
+    ];
+  };
+
+  Object.defineProperty(newRequire, 'root', {
+    get: function () {
+      return globalObject[parcelRequireName];
+    },
+  });
+
+  globalObject[parcelRequireName] = newRequire;
+
+  for (var i = 0; i < entry.length; i++) {
+    newRequire(entry[i]);
+  }
+
+  if (mainEntry) {
+    // Expose entry point to Node, AMD or browser globals
+    // Based on https://github.com/ForbesLindesay/umd/blob/master/template.js
+    var mainExports = newRequire(mainEntry);
+
+    // CommonJS
+    if (typeof exports === 'object' && typeof module !== 'undefined') {
+      module.exports = mainExports;
+
+      // RequireJS
+    } else if (typeof define === 'function' && define.amd) {
+      define(function () {
+        return mainExports;
+      });
+
+      // <script>
+    } else if (globalName) {
+      this[globalName] = mainExports;
+    }
+  }
+})({"cMO9E":[function(require,module,exports) {
+var HMR_HOST = null;
+var HMR_PORT = 1234;
+var HMR_SECURE = false;
+var HMR_ENV_HASH = "aad8060c4c6222f5";
+module.bundle.HMR_BUNDLE_ID = "67447a594122b238";
+"use strict";
+function _toConsumableArray(arr) {
+    return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
+}
+function _nonIterableSpread() {
+    throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+function _iterableToArray(iter) {
+    if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
+}
+function _arrayWithoutHoles(arr) {
+    if (Array.isArray(arr)) return _arrayLikeToArray(arr);
+}
+function _createForOfIteratorHelper(o, allowArrayLike) {
+    var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"];
+    if (!it) {
+        if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") {
+            if (it) o = it;
+            var i = 0;
+            var F = function F() {
+            };
+            return {
+                s: F,
+                n: function n() {
+                    if (i >= o.length) return {
+                        done: true
+                    };
+                    return {
+                        done: false,
+                        value: o[i++]
+                    };
+                },
+                e: function e(_e) {
+                    throw _e;
+                },
+                f: F
+            };
+        }
+        throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+    }
+    var normalCompletion = true, didErr = false, err;
+    return {
+        s: function s() {
+            it = it.call(o);
+        },
+        n: function n() {
+            var step = it.next();
+            normalCompletion = step.done;
+            return step;
+        },
+        e: function e(_e2) {
+            didErr = true;
+            err = _e2;
+        },
+        f: function f() {
+            try {
+                if (!normalCompletion && it.return != null) it.return();
+            } finally{
+                if (didErr) throw err;
+            }
+        }
+    };
+}
+function _unsupportedIterableToArray(o, minLen) {
+    if (!o) return;
+    if (typeof o === "string") return _arrayLikeToArray(o, minLen);
+    var n = Object.prototype.toString.call(o).slice(8, -1);
+    if (n === "Object" && o.constructor) n = o.constructor.name;
+    if (n === "Map" || n === "Set") return Array.from(o);
+    if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
+}
+function _arrayLikeToArray(arr, len) {
+    if (len == null || len > arr.length) len = arr.length;
+    for(var i = 0, arr2 = new Array(len); i < len; i++)arr2[i] = arr[i];
+    return arr2;
+}
+/* global HMR_HOST, HMR_PORT, HMR_ENV_HASH, HMR_SECURE */ /*::
+import type {
+  HMRAsset,
+  HMRMessage,
+} from '@parcel/reporter-dev-server/src/HMRServer.js';
+interface ParcelRequire {
+  (string): mixed;
+  cache: {|[string]: ParcelModule|};
+  hotData: mixed;
+  Module: any;
+  parent: ?ParcelRequire;
+  isParcelRequire: true;
+  modules: {|[string]: [Function, {|[string]: string|}]|};
+  HMR_BUNDLE_ID: string;
+  root: ParcelRequire;
+}
+interface ParcelModule {
+  hot: {|
+    data: mixed,
+    accept(cb: (Function) => void): void,
+    dispose(cb: (mixed) => void): void,
+    // accept(deps: Array<string> | string, cb: (Function) => void): void,
+    // decline(): void,
+    _acceptCallbacks: Array<(Function) => void>,
+    _disposeCallbacks: Array<(mixed) => void>,
+  |};
+}
+declare var module: {bundle: ParcelRequire, ...};
+declare var HMR_HOST: string;
+declare var HMR_PORT: string;
+declare var HMR_ENV_HASH: string;
+declare var HMR_SECURE: boolean;
+*/ var OVERLAY_ID = '__parcel__error__overlay__';
+var OldModule = module.bundle.Module;
+function Module(moduleName) {
+    OldModule.call(this, moduleName);
+    this.hot = {
+        data: module.bundle.hotData,
+        _acceptCallbacks: [],
+        _disposeCallbacks: [],
+        accept: function accept(fn) {
+            this._acceptCallbacks.push(fn || function() {
+            });
+        },
+        dispose: function dispose(fn) {
+            this._disposeCallbacks.push(fn);
+        }
+    };
+    module.bundle.hotData = undefined;
+}
+module.bundle.Module = Module;
+var checkedAssets, acceptedAssets, assetsToAccept;
+function getHostname() {
+    return HMR_HOST || (location.protocol.indexOf('http') === 0 ? location.hostname : 'localhost');
+}
+function getPort() {
+    return HMR_PORT || location.port;
+} // eslint-disable-next-line no-redeclare
+var parent = module.bundle.parent;
+if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
+    var hostname = getHostname();
+    var port = getPort();
+    var protocol = HMR_SECURE || location.protocol == 'https:' && !/localhost|127.0.0.1|0.0.0.0/.test(hostname) ? 'wss' : 'ws';
+    var ws = new WebSocket(protocol + '://' + hostname + (port ? ':' + port : '') + '/'); // $FlowFixMe
+    ws.onmessage = function(event) {
+        checkedAssets = {
+        };
+        acceptedAssets = {
+        };
+        assetsToAccept = [];
+        var data = JSON.parse(event.data);
+        if (data.type === 'update') {
+            // Remove error overlay if there is one
+            if (typeof document !== 'undefined') removeErrorOverlay();
+            var assets = data.assets.filter(function(asset) {
+                return asset.envHash === HMR_ENV_HASH;
+            }); // Handle HMR Update
+            var handled = assets.every(function(asset) {
+                return asset.type === 'css' || asset.type === 'js' && hmrAcceptCheck(module.bundle.root, asset.id, asset.depsByBundle);
+            });
+            if (handled) {
+                console.clear();
+                assets.forEach(function(asset) {
+                    hmrApply(module.bundle.root, asset);
+                });
+                for(var i = 0; i < assetsToAccept.length; i++){
+                    var id = assetsToAccept[i][1];
+                    if (!acceptedAssets[id]) hmrAcceptRun(assetsToAccept[i][0], id);
+                }
+            } else window.location.reload();
+        }
+        if (data.type === 'error') {
+            // Log parcel errors to console
+            var _iterator = _createForOfIteratorHelper(data.diagnostics.ansi), _step;
+            try {
+                for(_iterator.s(); !(_step = _iterator.n()).done;){
+                    var ansiDiagnostic = _step.value;
+                    var stack = ansiDiagnostic.codeframe ? ansiDiagnostic.codeframe : ansiDiagnostic.stack;
+                    console.error('🚨 [parcel]: ' + ansiDiagnostic.message + '\n' + stack + '\n\n' + ansiDiagnostic.hints.join('\n'));
+                }
+            } catch (err) {
+                _iterator.e(err);
+            } finally{
+                _iterator.f();
+            }
+            if (typeof document !== 'undefined') {
+                // Render the fancy html overlay
+                removeErrorOverlay();
+                var overlay = createErrorOverlay(data.diagnostics.html); // $FlowFixMe
+                document.body.appendChild(overlay);
+            }
+        }
+    };
+    ws.onerror = function(e) {
+        console.error(e.message);
+    };
+    ws.onclose = function() {
+        console.warn('[parcel] 🚨 Connection to the HMR server was lost');
+    };
+}
+function removeErrorOverlay() {
+    var overlay = document.getElementById(OVERLAY_ID);
+    if (overlay) {
+        overlay.remove();
+        console.log('[parcel] ✨ Error resolved');
+    }
+}
+function createErrorOverlay(diagnostics) {
+    var overlay = document.createElement('div');
+    overlay.id = OVERLAY_ID;
+    var errorHTML = '<div style="background: black; opacity: 0.85; font-size: 16px; color: white; position: fixed; height: 100%; width: 100%; top: 0px; left: 0px; padding: 30px; font-family: Menlo, Consolas, monospace; z-index: 9999;">';
+    var _iterator2 = _createForOfIteratorHelper(diagnostics), _step2;
+    try {
+        for(_iterator2.s(); !(_step2 = _iterator2.n()).done;){
+            var diagnostic = _step2.value;
+            var stack = diagnostic.codeframe ? diagnostic.codeframe : diagnostic.stack;
+            errorHTML += "\n      <div>\n        <div style=\"font-size: 18px; font-weight: bold; margin-top: 20px;\">\n          \uD83D\uDEA8 ".concat(diagnostic.message, "\n        </div>\n        <pre>").concat(stack, "</pre>\n        <div>\n          ").concat(diagnostic.hints.map(function(hint) {
+                return '<div>💡 ' + hint + '</div>';
+            }).join(''), "\n        </div>\n        ").concat(diagnostic.documentation ? "<div>\uD83D\uDCDD <a style=\"color: violet\" href=\"".concat(diagnostic.documentation, "\" target=\"_blank\">Learn more</a></div>") : '', "\n      </div>\n    ");
+        }
+    } catch (err) {
+        _iterator2.e(err);
+    } finally{
+        _iterator2.f();
+    }
+    errorHTML += '</div>';
+    overlay.innerHTML = errorHTML;
+    return overlay;
+}
+function getParents(bundle, id) /*: Array<[ParcelRequire, string]> */ {
+    var modules = bundle.modules;
+    if (!modules) return [];
+    var parents = [];
+    var k, d, dep;
+    for(k in modules)for(d in modules[k][1]){
+        dep = modules[k][1][d];
+        if (dep === id || Array.isArray(dep) && dep[dep.length - 1] === id) parents.push([
+            bundle,
+            k
+        ]);
+    }
+    if (bundle.parent) parents = parents.concat(getParents(bundle.parent, id));
+    return parents;
+}
+function updateLink(link) {
+    var newLink = link.cloneNode();
+    newLink.onload = function() {
+        if (link.parentNode !== null) // $FlowFixMe
+        link.parentNode.removeChild(link);
+    };
+    newLink.setAttribute('href', link.getAttribute('href').split('?')[0] + '?' + Date.now()); // $FlowFixMe
+    link.parentNode.insertBefore(newLink, link.nextSibling);
+}
+var cssTimeout = null;
+function reloadCSS() {
+    if (cssTimeout) return;
+    cssTimeout = setTimeout(function() {
+        var links = document.querySelectorAll('link[rel="stylesheet"]');
+        for(var i = 0; i < links.length; i++){
+            // $FlowFixMe[incompatible-type]
+            var href = links[i].getAttribute('href');
+            var hostname = getHostname();
+            var servedFromHMRServer = hostname === 'localhost' ? new RegExp('^(https?:\\/\\/(0.0.0.0|127.0.0.1)|localhost):' + getPort()).test(href) : href.indexOf(hostname + ':' + getPort());
+            var absolute = /^https?:\/\//i.test(href) && href.indexOf(window.location.origin) !== 0 && !servedFromHMRServer;
+            if (!absolute) updateLink(links[i]);
+        }
+        cssTimeout = null;
+    }, 50);
+}
+function hmrApply(bundle, asset) {
+    var modules = bundle.modules;
+    if (!modules) return;
+    if (asset.type === 'css') reloadCSS();
+    else if (asset.type === 'js') {
+        var deps = asset.depsByBundle[bundle.HMR_BUNDLE_ID];
+        if (deps) {
+            if (modules[asset.id]) {
+                // Remove dependencies that are removed and will become orphaned.
+                // This is necessary so that if the asset is added back again, the cache is gone, and we prevent a full page reload.
+                var oldDeps = modules[asset.id][1];
+                for(var dep in oldDeps)if (!deps[dep] || deps[dep] !== oldDeps[dep]) {
+                    var id = oldDeps[dep];
+                    var parents = getParents(module.bundle.root, id);
+                    if (parents.length === 1) hmrDelete(module.bundle.root, id);
+                }
+            }
+            var fn = new Function('require', 'module', 'exports', asset.output);
+            modules[asset.id] = [
+                fn,
+                deps
+            ];
+        } else if (bundle.parent) hmrApply(bundle.parent, asset);
+    }
+}
+function hmrDelete(bundle, id1) {
+    var modules = bundle.modules;
+    if (!modules) return;
+    if (modules[id1]) {
+        // Collect dependencies that will become orphaned when this module is deleted.
+        var deps = modules[id1][1];
+        var orphans = [];
+        for(var dep in deps){
+            var parents = getParents(module.bundle.root, deps[dep]);
+            if (parents.length === 1) orphans.push(deps[dep]);
+        } // Delete the module. This must be done before deleting dependencies in case of circular dependencies.
+        delete modules[id1];
+        delete bundle.cache[id1]; // Now delete the orphans.
+        orphans.forEach(function(id) {
+            hmrDelete(module.bundle.root, id);
+        });
+    } else if (bundle.parent) hmrDelete(bundle.parent, id1);
+}
+function hmrAcceptCheck(bundle, id, depsByBundle) {
+    if (hmrAcceptCheckOne(bundle, id, depsByBundle)) return true;
+     // Traverse parents breadth first. All possible ancestries must accept the HMR update, or we'll reload.
+    var parents = getParents(module.bundle.root, id);
+    var accepted = false;
+    while(parents.length > 0){
+        var v = parents.shift();
+        var a = hmrAcceptCheckOne(v[0], v[1], null);
+        if (a) // If this parent accepts, stop traversing upward, but still consider siblings.
+        accepted = true;
+        else {
+            // Otherwise, queue the parents in the next level upward.
+            var p = getParents(module.bundle.root, v[1]);
+            if (p.length === 0) {
+                // If there are no parents, then we've reached an entry without accepting. Reload.
+                accepted = false;
+                break;
+            }
+            parents.push.apply(parents, _toConsumableArray(p));
+        }
+    }
+    return accepted;
+}
+function hmrAcceptCheckOne(bundle, id, depsByBundle) {
+    var modules = bundle.modules;
+    if (!modules) return;
+    if (depsByBundle && !depsByBundle[bundle.HMR_BUNDLE_ID]) {
+        // If we reached the root bundle without finding where the asset should go,
+        // there's nothing to do. Mark as "accepted" so we don't reload the page.
+        if (!bundle.parent) return true;
+        return hmrAcceptCheck(bundle.parent, id, depsByBundle);
+    }
+    if (checkedAssets[id]) return true;
+    checkedAssets[id] = true;
+    var cached = bundle.cache[id];
+    assetsToAccept.push([
+        bundle,
+        id
+    ]);
+    if (!cached || cached.hot && cached.hot._acceptCallbacks.length) return true;
+}
+function hmrAcceptRun(bundle, id) {
+    var cached = bundle.cache[id];
+    bundle.hotData = {
+    };
+    if (cached && cached.hot) cached.hot.data = bundle.hotData;
+    if (cached && cached.hot && cached.hot._disposeCallbacks.length) cached.hot._disposeCallbacks.forEach(function(cb) {
+        cb(bundle.hotData);
+    });
+    delete bundle.cache[id];
+    bundle(id);
+    cached = bundle.cache[id];
+    if (cached && cached.hot && cached.hot._acceptCallbacks.length) cached.hot._acceptCallbacks.forEach(function(cb) {
+        var assetsToAlsoAccept = cb(function() {
+            return getParents(module.bundle.root, id);
+        });
+        if (assetsToAlsoAccept && assetsToAccept.length) // $FlowFixMe[method-unbinding]
+        assetsToAccept.push.apply(assetsToAccept, assetsToAlsoAccept);
+    });
+    acceptedAssets[id] = true;
+}
+
+},{}],"iSjLi":[function(require,module,exports) {
+var _mapboxJs = require("./mapbox.js");
+var _loginJs = require("./login.js");
+var _updateUserJs = require("./updateUser.js");
+var _checkoutJs = require("./checkout.js");
+const mapBoxElement = document.getElementById('map');
+const formElement = document.querySelector('.form--login');
+const logoutElement = document.querySelector('.nav__el--logout');
+const updateFormElement = document.querySelector('.form-user-data');
+const updatePasswordElement = document.querySelector('.form-user-password');
+const bookNowElement = document.getElementById('book-tour');
+//if the element exists, then invoke following code.
+//this is for map box
+if (mapBoxElement) {
+    const locations = JSON.parse(mapBoxElement.dataset.locations);
+    _mapboxJs.mapbox(locations);
+}
+//this is for logging form
+if (formElement) formElement.addEventListener('submit', (event)=>{
+    event.preventDefault();
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    _loginJs.login(email, password);
+});
+//this is for logging out form
+if (logoutElement) logoutElement.addEventListener('click', (event)=>{
+    event.preventDefault();
+    _loginJs.logout();
+});
+//this is for updating user via form input
+if (updateFormElement) updateFormElement.addEventListener('submit', (event)=>{
+    event.preventDefault();
+    const formData = new FormData();
+    formData.append('email', document.getElementById('email').value);
+    formData.append('name', document.getElementById('name').value);
+    formData.append('photo', document.getElementById('photo').files[0]);
+    _updateUserJs.updateSetting(formData, 'data');
+});
+//this is for updating password via form input
+if (updatePasswordElement) updatePasswordElement.addEventListener('submit', (event)=>{
+    event.preventDefault();
+    const passwordCurrent = document.getElementById('password-current').value;
+    const password = document.getElementById('password').value;
+    const passwordConfirm = document.getElementById('password-confirm').value;
+    _updateUserJs.updateSetting({
+        passwordCurrent,
+        password,
+        passwordConfirm
+    }, 'password');
+});
+//this is for checkout page
+if (bookNowElement) bookNowElement.addEventListener('click', (event)=>{
+    event.preventDefault();
+    bookNowElement.innerHTML = 'Processing...';
+    const { tourId  } = event.target.dataset;
+    console.log(tourId);
+    _checkoutJs.bookNow(tourId);
+});
+
+},{"./mapbox.js":"j9wQe","./login.js":"h66Sr","./updateUser.js":"DUSd2","./checkout.js":"c1wuS"}],"j9wQe":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "mapbox", ()=>mapbox
+);
+const mapbox = (locations)=>{
+    mapboxgl.accessToken = 'pk.eyJ1IjoiYmlzaGFsa2Fya2kiLCJhIjoiY2t6NG4wbHlmMGk5bDJ2bnltYzR1ZW54NCJ9.3hBPs8q_dHXFJ0lK6ln7SA';
+    const map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v11',
+        scrollZoom: false
+    });
+    const bounds = new mapboxgl.LngLatBounds();
+    locations.forEach((loc)=>{
+        //create marker
+        const el = document.createElement('div');
+        el.className = 'marker';
+        //Add marker
+        new mapboxgl.Marker({
+            element: el,
+            anchor: 'bottom'
+        }).setLngLat(loc.coordinates).addTo(map);
+        //Add popup
+        new mapboxgl.Popup({
+            offset: 30
+        }).setLngLat(loc.coordinates).setHTML(`<p>Day ${loc.day}: ${loc.description}</p>`).addTo(map);
+        //Extend map bounds to include current location
+        bounds.extend(loc.coordinates);
+    });
+    map.fitBounds(bounds);
+};
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"hLbjP"}],"hLbjP":[function(require,module,exports) {
+exports.interopDefault = function(a) {
+    return a && a.__esModule ? a : {
+        default: a
+    };
+};
+exports.defineInteropFlag = function(a) {
+    Object.defineProperty(a, '__esModule', {
+        value: true
+    });
+};
+exports.exportAll = function(source, dest) {
+    Object.keys(source).forEach(function(key) {
+        if (key === 'default' || key === '__esModule' || dest.hasOwnProperty(key)) return;
+        Object.defineProperty(dest, key, {
+            enumerable: true,
+            get: function() {
+                return source[key];
+            }
+        });
+    });
+    return dest;
+};
+exports.export = function(dest, destName, get) {
+    Object.defineProperty(dest, destName, {
+        enumerable: true,
+        get: get
+    });
+};
+
+},{}],"h66Sr":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "login", ()=>login
+);
+parcelHelpers.export(exports, "logout", ()=>logout
+);
+var _axios = require("axios");
+var _axiosDefault = parcelHelpers.interopDefault(_axios);
+var _alertJs = require("./alert.js");
+const login = async (email, password)=>{
+    try {
+        const result = await _axiosDefault.default({
+            method: 'post',
+            url: '/api/v1/users/signin',
+            data: {
+                email,
+                password
+            }
+        });
+        result.data.status = 'success';
+        _alertJs.showAlert('success', 'logged in successfully!');
+        window.setTimeout(()=>{
+            location.assign('/');
+        }, 1500);
+    } catch (error) {
+        _alertJs.showAlert('error', error.response.data.message);
+    }
+};
+const logout = async ()=>{
+    try {
+        const result = await _axiosDefault.default({
+            method: 'GET',
+            url: '/api/v1/users/logout'
+        });
+        if (result.data.status === 'success') window.setTimeout(()=>{
+            location.assign('/');
+        }, 1000);
+    } catch (error) {
+        _alertJs.showAlert('error', error.response.data.message);
+    }
+};
+
+},{"./alert.js":"gDIxv","@parcel/transformer-js/src/esmodule-helpers.js":"hLbjP"}],"gDIxv":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "hideAlert", ()=>hideAlert
+);
+parcelHelpers.export(exports, "showAlert", ()=>showAlert
+);
+const hideAlert = ()=>{
+    const el = document.querySelector('.alert');
+    if (el) el.parentElement.removeChild(el);
+};
+const showAlert = (type, msg)=>{
+    hideAlert();
+    const markup = `<div class="alert alert--${type}">${msg}</div>`;
+    document.querySelector('body').insertAdjacentHTML('afterbegin', markup);
+    window.setTimeout(hideAlert, 5000);
+};
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"hLbjP"}],"DUSd2":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "updateSetting", ()=>updateSetting
+);
+var _axios = require("axios");
+var _axiosDefault = parcelHelpers.interopDefault(_axios);
+var _alert = require("./alert");
+const updateSetting = async (data, type)=>{
+    try {
+        const url = type === 'password' ? '/api/v1/users/updatepassword' : '/api/v1/users/updateme';
+        const result = await _axiosDefault.default({
+            method: 'patch',
+            url,
+            data
+        });
+        result.data.status = 'success';
+        _alert.showAlert('success', `user ${type} updated successfully`);
+    } catch (error) {
+        _alert.showAlert('error', error.response.data.message);
+    }
+};
+
+},{"./alert":"gDIxv","@parcel/transformer-js/src/esmodule-helpers.js":"hLbjP"}],"c1wuS":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "bookNow", ()=>bookNow
+);
+var _axios = require("axios");
+var _axiosDefault = parcelHelpers.interopDefault(_axios);
+var _alertJs = require("./alert.js");
+const stripe = Stripe('pk_test_51KQpuTKrlXNuJzMcYQn015K2UlTnesCu0KnHXGEwbG52vHrjHOgKV5HlKzukUhRwPbaK846qTRlnkj5igvxt84Kd00RMfao0h2');
+const bookNow = async (tourID)=>{
+    try {
+        //1)get checkout session from the api
+        const session = await _axiosDefault.default(`/api/v1/bookings/checkout-session/${tourID}`);
+        //2)create checkout form and charge the credit card
+        if (session) await stripe.redirectToCheckout({
+            sessionId: session.data.session.id
+        });
+    } catch (error) {
+        _alertJs.showAlert('error', error);
+    }
+};
+
+},{"./alert.js":"gDIxv","@parcel/transformer-js/src/esmodule-helpers.js":"hLbjP"}]},["cMO9E","iSjLi"], "iSjLi", "parcelRequire11c7")
+
 //# sourceMappingURL=index.js.map

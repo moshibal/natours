@@ -16,7 +16,6 @@ const createTokenAndSend = (id, user, res, req) => {
   res.cookie('jwt', token, {
     expires: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000),
     httpOnly: true,
-    secure: req.secure || req.headers['x-forwarded-proto' === 'https'],
   });
   user.password = undefined;
 
@@ -31,6 +30,7 @@ const createTokenAndSend = (id, user, res, req) => {
 //handler for signing up the user
 export const signup = async (req, res) => {
   try {
+    console.log(req.body);
     const userDocument = {
       name: req.body.name,
       email: req.body.email,
@@ -41,7 +41,7 @@ export const signup = async (req, res) => {
     //sending the welcome email for the newly login user.
     const url = `${req.protocol}://${req.get('host')}/me`;
     await new Email(newUser, url).sendWelcome();
-    createTokenAndSend(newUser._id, newUser, res);
+    createTokenAndSend(newUser._id, newUser, res, req);
   } catch (error) {
     res.status(404).json({
       status: 'fail',

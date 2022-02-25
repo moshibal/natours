@@ -3,19 +3,19 @@
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
+  "type": "module",
   "scripts": {
     "start": "node server.js",
     "parcel:watch": "parcel watch ./public/js/index.js --dist-dir ./public/js/output",
     "parcel:build": "parcel build ./public/js/index.js --dist-dir ./public/js/output"
   },
-  "type": "module",
   "author": "bishal",
   "license": "ISC",
   "targets": {
     "main": false
   },
   "dependencies": {
-    "axios": "^0.25.0",
+    "axios": "^0.26.0",
     "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
@@ -42,6 +42,6 @@
     "xss-clean": "^0.1.1"
   },
   "engines": {
-    "node": "14.x"
+    "node": "^10"
   }
 }

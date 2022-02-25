@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { showAlert } from './alert';
 export const updateSetting = async (data, type) => {
   try {

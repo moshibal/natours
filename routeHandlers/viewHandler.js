@@ -25,6 +25,15 @@ export const loginHandler = async (req, res) => {
     res.render('_error', { error: 'please try it again.' });
   }
 };
+export const signUpHandler = async (req, res) => {
+  try {
+    res.status(200).render('_signup', {
+      title: 'sign up into your account',
+    });
+  } catch (error) {
+    res.render('_error', { error: 'please try it again.' });
+  }
+};
 
 export const logoutHandler = async (req, res) => {
   try {

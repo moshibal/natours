@@ -7,23 +7,18 @@ html
       title Natours | #{title}
       link(rel='stylesheet' href='/css/style.css')
       link(rel='shortcut icon' type='/image/png' href='/img/favicon.png')
-      link(href='https://fonts.googleapis.com/css?family=Lato:300,300i,700'
-          rel='stylesheet')
-      script(src='https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js')
+      link(href='https://fonts.googleapis.com/css?family=Lato:300,300i,700' rel='stylesheet')
+      script(src='https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js') 
       script(src='https://js.stripe.com/v3/')
-      
       link(href='https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css' rel='stylesheet')
   
-
   body 
 <!--Header-->
   include _header
   block content 
    h1 This is the placeholder for h1
-   
 <!--footer-->
   include _footer
-  //- script(src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.25.0/axios.min.js")
-  //- script(src="/js/mapbox.js")
-  script(src="/js/output/index.js")
+  script(src=`https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.0/axios.min.js`)
+  script(src="/js/output/index.js" type="module")
   

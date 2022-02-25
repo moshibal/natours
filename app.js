@@ -35,6 +35,8 @@ app.use(express.static(`${__dirname}/public`));
 //Helmet helps you secure your Express apps by setting various HTTP headers. It's not a silver bullet, but it can help!
 
 const scriptSrcUrls = [
+  'https://unpkg.com/axios/dist/axios.min.js',
+  'https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js',
   'https://api.tiles.mapbox.com/',
   'https://api.mapbox.com/',
   'https://*.cloudflare.com',
@@ -47,13 +49,16 @@ const styleSrcUrls = [
   'https://fonts.googleapis.com/',
 ];
 const connectSrcUrls = [
+  'https://unpkg.com/axios/dist/axios.min.js',
+  'https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js',
   'https://api.mapbox.com/',
   'https://a.tiles.mapbox.com/',
   'https://b.tiles.mapbox.com/',
   'https://events.mapbox.com/',
   'https://*.cloudflare.com',
   'ws://localhost:1234/',
-  'http://127.0.0.1:3000/',
+
+  'http://127.0.0.1:1337/',
   'https://js.stripe.com/v3/',
 ];
 const fontSrcUrls = ['fonts.googleapis.com', 'fonts.gstatic.com'];
@@ -64,6 +69,7 @@ app.use(
       connectSrc: ["'self'", ...connectSrcUrls],
       scriptSrc: ["'self'", ...scriptSrcUrls],
       styleSrc: ["'self'", "'unsafe-inline'", ...styleSrcUrls],
+
       workerSrc: ["'self'", 'blob:'],
       objectSrc: [],
       imgSrc: ["'self'", 'blob:', 'data:'],
